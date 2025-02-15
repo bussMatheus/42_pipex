@@ -1,6 +1,6 @@
 # Source files
-SRC = SRC/ft_strlen.c SRC/ft_strncmp.c SRC/ft_strjoin.c \
-	SRC/ft_strlcpy.c SRC/ft_strdup.c SRC/ft_putstr_fd.c \
+SRC = SRC/ft_strlen.c SRC/ft_strncmp.c SRC/ft_strjoin.c SRC/ft_bzero.c \
+	SRC/ft_strlcpy.c SRC/ft_strdup.c SRC/ft_putstr_fd.c SRC/ft_memset.c \
     SRC/ft_split.c SRC/ft_split_shell.c SRC/ft_split_shell_utils.c \
 	SRC/get_next_line.c SRC/get_next_line_utils.c SRC/ft_strlcat.c
 

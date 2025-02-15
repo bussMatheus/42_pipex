@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mely-pan <mely-pan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/15 12:57:13 by mely-pan          #+#    #+#             */
+/*   Updated: 2025/02/15 12:57:15 by mely-pan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft.h"
 
 static char	*ft_strdupp(char *s)
@@ -20,8 +32,8 @@ static char	*ft_strdupp(char *s)
 
 static void	ft_joining(char *s1, char *buffer, char *new_s)
 {
-	size_t		i;
-	size_t		j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	j = 0;
@@ -35,7 +47,7 @@ static void	ft_joining(char *s1, char *buffer, char *new_s)
 		new_s[i + j] = buffer[j];
 		j++;
 	}
-	if (buffer [j] == '\n')
+	if (buffer[j] == '\n')
 		new_s[i + j++] = '\n';
 	new_s[i + j] = 0;
 }
@@ -61,21 +73,21 @@ char	*ft_strjoin_gnl(char *s1, char *buffer)
 
 int	cut_remaining(char *buf)
 {
-    int i;
-    int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
-    while (buf[i] && buf[i] != '\n')
-        i++;
-    if (buf[i] == '\n')
-    {
-        i++;
-        while (buf[i])
-        	buf[j++] = buf[i++];
-    	buf[j] = '\0';
+	while (buf[i] && buf[i] != '\n')
+		i++;
+	if (buf[i] == '\n')
+	{
+		i++;
+		while (buf[i])
+			buf[j++] = buf[i++];
+		buf[j] = '\0';
 		return (1);
-    }
+	}
 	buf[0] = '\0';
 	return (0);
 }

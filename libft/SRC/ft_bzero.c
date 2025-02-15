@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mely-pan <mely-pan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/15 12:58:45 by mely-pan          #+#    #+#             */
-/*   Updated: 2025/02/15 12:59:30 by mely-pan         ###   ########.fr       */
+/*   Created: 2024/04/11 16:49:24 by mely-pan          #+#    #+#             */
+/*   Updated: 2024/05/22 20:21:28 by mely-pan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../libft.h"
 
-int	main(int argc, char **argv, char **env)
+void	ft_bzero(void *s, size_t n)
 {
-	if (argc < 5)
-		error_exit(NULL, "Invalid arguments!");
-	pipex(argc, argv, env);
-	return (0);
+	ft_memset(s, '\0', n);
 }

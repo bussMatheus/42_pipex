@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mely-pan <mely-pan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/15 12:57:57 by mely-pan          #+#    #+#             */
+/*   Updated: 2025/02/15 14:59:54 by mely-pan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 int	child_process(t_pipex *pipx, int i)
@@ -11,20 +23,18 @@ int	child_process(t_pipex *pipx, int i)
 		error_exit(pipx, "Error forking :(");
 	if (pid == 0)
 	{
-		//*child process
-		//* duplicate fd (STDIN_FILENO linux closes it automatically)
 		dup2(pipx->prev_pipe, STDIN_FILENO);
 		close(pipx->prev_pipe);
 		if (i < pipx->cmd_count - 1)
 		{
 			dup2(pipx->pipefd[1], STDOUT_FILENO); //* cmds
-			close(pipx->pipefd[1]); // *close pipe's writing after dup
+			close(pipx->pipefd[1]);
 			close(pipx->pipefd[0]); // *close pipe reading
 		}
 		else
 		{
 			dup2(pipx->outfile, STDOUT_FILENO); //* last cmd
-			close(pipx->outfile); // *close outfile after redirecting
+			close(pipx->outfile);
 		}
 		execute(pipx, pipx->cmds[i], pipx->env);
 	}
@@ -33,6 +43,7 @@ int	child_process(t_pipex *pipx, int i)
 
 void	init_pipx(t_pipex *pipx, int argc, char **argv, char **env)
 {
+	ft_bzero(pipx, sizeof(t_pipex));
 	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
 		init_pipex_here_doc(pipx, argc, argv, env);
 	else
@@ -44,7 +55,8 @@ void	init_pipx(t_pipex *pipx, int argc, char **argv, char **env)
 		pipx->infile = open(argv[1], O_RDONLY);
 		if (pipx->infile < 0)
 			error_exit(pipx, "Error opening infile");
-		pipx->outfile = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		pipx->outfile = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC,
+				0644);
 		if (pipx->outfile < 0)
 			error_exit(pipx, "Error opening outfile");
 		pipx->prev_pipe = pipx->infile;
@@ -65,7 +77,7 @@ void	execute(t_pipex *pipx, char *cmd, char **env)
 		ft_putstr_fd("\n", 2);
 		free_paths(cmd_args);
 		error_exit(pipx, "Failure splitting commands");
-		//!exit(127);  maybe add flag_exit and add exit(flag_exit) in error_ecit()
+		//! exit(127);  maybe add flag_exit and add exit(flag_exit) in error_ecit()
 	}
 	execve(cmd_path, cmd_args, env);
 	perror("execve failed");
@@ -74,7 +86,7 @@ void	execute(t_pipex *pipx, char *cmd, char **env)
 	exit(1);
 }
 
-char *find_command(char *cmd_args, char **env)
+char	*find_command(char *cmd_args, char **env)
 {
 	char	**paths;
 	char	*full_path;
@@ -105,7 +117,7 @@ char *find_command(char *cmd_args, char **env)
 
 void	pipex(int argc, char **argv, char **env)
 {
-	t_pipex pipx;
+	t_pipex	pipx;
 	pid_t	pid;
 	int		i;
 

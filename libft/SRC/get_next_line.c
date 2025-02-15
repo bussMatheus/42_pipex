@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mely-pan <mely-pan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/15 12:57:18 by mely-pan          #+#    #+#             */
+/*   Updated: 2025/02/15 12:57:19 by mely-pan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft.h"
 
 char	*get_next_line(int fd)
 {
-	static char buff[BUFFER_SIZE + 1];
+	static char	buff[BUFFER_SIZE + 1];
 	char		*line;
 	int			b_read;
 
@@ -29,18 +41,20 @@ char	*get_next_line(int fd)
 	return (line);
 }
 /*
-int	main()
+int	main(void)
 {
-	char *line;
-	int fd = open("./file.txt", O_RDONLY);
-	int lines = 0;
+	char	*line;
+	int		fd;
+	int		lines;
 
-    while ((line = get_next_line(fd)))
-    {
-        printf("%d, %s\n", lines++, line);
-        free(line);
-    }
-    close(fd);
-    return (0);
+	fd = open("./file.txt", O_RDONLY);
+	lines = 0;
+	while ((line = get_next_line(fd)))
+	{
+		printf("%d, %s\n", lines++, line);
+		free(line);
+	}
+	close(fd);
+	return (0);
 }
 */
