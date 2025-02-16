@@ -6,7 +6,7 @@
 /*   By: mely-pan <mely-pan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 12:57:57 by mely-pan          #+#    #+#             */
-/*   Updated: 2025/02/15 14:59:54 by mely-pan         ###   ########.fr       */
+/*   Updated: 2025/02/16 20:23:32 by mely-pan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ int	child_process(t_pipex *pipx, int i)
 		close(pipx->prev_pipe);
 		if (i < pipx->cmd_count - 1)
 		{
-			dup2(pipx->pipefd[1], STDOUT_FILENO); //* cmds
+			dup2(pipx->pipefd[1], STDOUT_FILENO);
 			close(pipx->pipefd[1]);
-			close(pipx->pipefd[0]); // *close pipe reading
+			close(pipx->pipefd[0]);
 		}
 		else
 		{
-			dup2(pipx->outfile, STDOUT_FILENO); //* last cmd
+			dup2(pipx->outfile, STDOUT_FILENO);
 			close(pipx->outfile);
 		}
 		execute(pipx, pipx->cmds[i], pipx->env);
@@ -77,7 +77,6 @@ void	execute(t_pipex *pipx, char *cmd, char **env)
 		ft_putstr_fd("\n", 2);
 		free_paths(cmd_args);
 		error_exit(pipx, "Failure splitting commands");
-		//! exit(127);  maybe add flag_exit and add exit(flag_exit) in error_ecit()
 	}
 	execve(cmd_path, cmd_args, env);
 	perror("execve failed");

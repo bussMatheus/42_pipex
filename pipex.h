@@ -6,7 +6,7 @@
 /*   By: mely-pan <mely-pan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 12:57:42 by mely-pan          #+#    #+#             */
-/*   Updated: 2025/02/15 12:59:09 by mely-pan         ###   ########.fr       */
+/*   Updated: 2025/02/16 20:29:43 by mely-pan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_pipex
 
 void		error_exit(t_pipex *pipx, char *s);
 void		free_paths(char **paths);
+int			check_empty_cmd(int argc, char **argv);
 
 char		*find_command(char *cmd_args, char **env);
 char		**get_paths(char **env);
